@@ -1,0 +1,146 @@
+/* PARA CAMBIAR EL ANCHO DEL MENU LATERAL, Y ESTILOS DEL SCROLL */
+body.vertical-layout.vertical-menu.menu-expanded .main-menu {
+    width: 280px;
+}
+.vertical-overlay-menu .main-menu, .vertical-overlay-menu.menu-hide .main-menu{
+    width: 290px;
+}
+
+.main-menu ul {
+    overflow: auto;
+    height: 100%;
+}
+.main-menu ul::-webkit-scrollbar {
+    width: 8px;     /* Tamaño del scroll en vertical */
+    height: 8px;    /* Tamaño del scroll en horizontal */
+    /* display: none;  Ocultar scroll */
+}
+.main-menu ul::-webkit-scrollbar-thumb {
+    background: #ccc;
+    border-radius: 4px;
+}
+
+/* Cambiamos el fondo y agregamos una sombra cuando esté en hover */
+.main-menu ul::-webkit-scrollbar-thumb:hover {
+    background: #b3b3b3;
+    box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.2);
+}
+
+/* Cambiamos el fondo cuando esté en active */
+.main-menu ul::-webkit-scrollbar-thumb:active {
+    background-color: #999999;
+}
+
+.button{
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 10px;
+}
+
+
+/* PARA CAMBIAR EL COLOR Y TEMA DEL PROYECTO */
+
+/* :root {
+    --color-bg: #ff7a1d;
+    --color-bg: #1da1ff;
+}    */
+
+/* .main-menu-content > .menu-title{
+    background: var(--color-bg) !important;
+}
+.main-menu-content > ul.menu-popout > li.active> a{
+    color: var(--color-bg) !important;
+}
+body.vertical-layout.vertical-menu.menu-expanded .main-menu.menu-dark .navigation .hover > a > i, body.vertical-layout.vertical-menu.menu-expanded .main-menu.menu-dark .navigation:hover > a > i, body.vertical-layout.vertical-menu.menu-expanded .main-menu.menu-dark .navigation .open > a > i{
+    box-shadow: 0 0 20px var(--color-bg);
+}
+.main-menu.menu-dark .navigation > li.open > a{
+    color: var(--color-bg);
+}
+.main-menu.menu-dark .navigation > li.hover > a, .main-menu.menu-dark .navigation > li:hover > a, .main-menu.menu-dark .navigation > li.active > a {
+    color: var(--color-bg);
+}
+.main-menu.menu-dark .navigation > li ul .active > a{
+    color: var(--color-bg);
+}
+.main-menu.menu-dark .navigation > li ul .active > a:before {
+    border-color: var(--color-bg);
+    background-color: var(--color-bg);
+}
+.main-menu.menu-dark .navigation > li.open .hover > a:before {
+    border-color: var(--color-bg);
+    background-color: var(--color-bg);
+}
+
+body.vertical-layout[data-color=bg-gradient-x-purple-blue] .navbar-container, body.vertical-layout[data-color=bg-gradient-x-purple-blue] .content-wrapper-before{
+    background-image: linear-gradient(to right, #f3be12, #e95b23);
+}
+.navbar-semi-light{
+    background-color: #f3be12;
+} */
+
+.header-navbar .navbar-container ul.nav li .scrollable-container {
+    overflow-y: scroll;
+}
+
+.cart__shiping p, .form__control__javier{
+    color: black !important;
+    font-size: 1.2em !important;
+}
+
+.label{
+    font-size: 1.2em !important;
+    color: rgb(68, 68, 68) !important;
+    font-weight: bold !important;
+}
+
+@media only screen and (min-width: 768px){
+    .cart__product-price, .cart__product-quantity, .cart__product-total, .cart__product-title{
+        font-size: 1.2em !important;
+    }
+}
+
+
+.product__item{
+    border: 1px solid rgb(180, 178, 178);
+    padding: 10px;
+    margin-bottom: 30px;
+}
+.title__product{
+    color: rgb(94, 93, 93);
+    font-size: 1.8em;
+    font-weight: bold;
+    margin-top: 15px;
+}
+
+.description__product{
+    font-size: 1.7em;
+    color: gray;
+}
+
+.price__product{
+    font-size: 2.7em;
+    color: #f38e35;
+    font-weight: bold;
+    margin-top: 25px;
+}
+
+.btn__product, .btn__product:hover{
+    background-color: #f38e35;
+    color: white;
+    font-size: 1.2em;
+    margin-top: 15px;
+}
+
+
+@media only screen and (min-width: 200px) and (max-width: 500px){
+    .price__product{
+        text-align: center;
+    }
+    /* .btn__product{
+        margin-top: 20px;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    } */
+}
