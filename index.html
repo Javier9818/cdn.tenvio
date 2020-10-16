@@ -1,11 +1,462 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mi CDN</title>
-</head>
-<body>
-    <h1>Hola mundo</h1>
-</body>
+<html>
+  <title>
+    TEST PSICOLÓGICO PARA IDENTIFICAR TIPOS DE PERSONALIDAD DE ACUERDO A LA EDAD
+  </title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link
+    href="https://fonts.googleapis.com/css?family=Raleway"
+    rel="stylesheet"
+  />
+  <link
+    rel="stylesheet"
+    href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+    crossorigin="anonymous"
+  />
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: #f1f1f1;
+    }
+
+    #regForm {
+      background-color: #ffffff;
+      margin: 50px auto;
+      font-family: Raleway;
+      padding: 40px;
+      width: 70%;
+      min-width: 300px;
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    input {
+      padding: 10px;
+      width: 100%;
+      font-size: 17px;
+      font-family: Raleway;
+      border: 1px solid #aaaaaa;
+    }
+
+    /* Mark input boxes that gets an error on validation: */
+    input.invalid {
+      background-color: #ffdddd;
+    }
+
+    /* Hide all steps by default: */
+    .tab {
+      display: none;
+    }
+
+    button {
+      background-color: #4caf50;
+      color: #ffffff;
+      border: none;
+      padding: 10px 20px;
+      font-size: 17px;
+      font-family: Raleway;
+      cursor: pointer;
+    }
+
+    button:hover {
+      opacity: 0.8;
+    }
+
+    #prevBtn {
+      background-color: #bbbbbb;
+    }
+
+    /* Make circles that indicate the steps of the form: */
+    .step {
+      height: 15px;
+      width: 15px;
+      margin: 0 2px;
+      background-color: #bbbbbb;
+      border: none;
+      border-radius: 50%;
+      display: inline-block;
+      opacity: 0.5;
+    }
+
+    .step.active {
+      opacity: 1;
+    }
+
+    /* Mark the steps that are finished and valid: */
+    .step.finish {
+      background-color: #4caf50;
+    }
+  </style>
+
+  <body
+    style="
+      background-image: url('https://miro.medium.com/max/3200/1*XPdZQ2qptwqui9YfY5XhTA.jpeg');
+      background-repeat: no-repeat;
+      background-position: center center;
+    "
+  >
+    <header>
+      <nav class="navbar navbar-light bg-light">
+        <span class="navbar-brand mb-0 h1"
+          >TEST PSICOLÓGICO PARA IDENTIFICAR TIPOS DE PERSONALIDAD DE ACUERDO A
+          LA EDAD</span
+        >
+      </nav>
+    </header>
+    <main>
+      <section>
+        <div id="app" class="container h-100">
+          <div class="row justify-content-center h-100 mt-3">
+            <div class="col-sm-10 align-self-center">
+              <div class="card shadow">
+                <div class="card-body">
+                  <h5 class="card-title text-center mt-2">{{text[view]}}</h5>
+                  <div>
+                    <form id="regForm">
+                      <div v-if="years">
+                        <ul class="list-group list-group-flush">
+                          <li
+                            class="list-group-item"
+                            v-for="(item,index) in steps.listYear"
+                          >
+                            <div class="row">
+                              <div class="col-6">
+                                <label
+                                  class="form-check-label pl-2"
+                                  :for="'edad_'+(index+1)"
+                                  >Edad de {{item.min}} - {{item.max}}
+                                  años</label
+                                >
+                              </div>
+                              <div class="col-6 text-left">
+                                <input
+                                  v-model="edad"
+                                  :value="index"
+                                  :id="'edad_'+(index+1)"
+                                  class="form-check-input"
+                                  type="radio"
+                                />
+                              </div>
+                            </div>
+                          </li>
+                        </ul>
+                      </div>
+                      <div v-if="questions">
+                        <ul class="list-group list-group-flush">
+                          <li
+                            class="list-group-item"
+                            v-for="(item,index) in steps.preguntas[edad].questions"
+                          >
+                            <div class="row">
+                              <div class="col-6">
+                                <label
+                                  class="form-check-label pl-2"
+                                  :for="'edad_'+(index+1)"
+                                  >{{item.pregunta}}</label
+                                >
+                              </div>
+                              <div class="col-6 text-left">
+                                <div class="form-check">
+                                  <input
+                                    class="form-check-input"
+                                    type="radio"
+                                    :name="'exampleRadios'+(index+1)"
+                                    id="exampleRadios1"
+                                    value="1"
+                                    v-model="item.respuesta"
+                                  />
+                                  <label
+                                    class="form-check-label"
+                                    for="exampleRadios1"
+                                    @click="log(item.respuesta)"
+                                  >
+                                    SI
+                                  </label>
+                                </div>
+                                <div class="form-check">
+                                  <input
+                                    class="form-check-input"
+                                    type="radio"
+                                    :name="'exampleRadios'+(index+1)"
+                                    id="exampleRadios2"
+                                    value="0"
+                                    v-model="item.respuesta"
+                                  />
+                                  <label
+                                    class="form-check-label"
+                                    for="exampleRadios2"
+                                  >
+                                    NO
+                                  </label>
+                                </div>
+                              </div>
+                            </div>
+                          </li>
+                        </ul>
+                      </div>
+                      <div v-if="state">
+												<h1 class=" text-uppercase text-dark text-center">{{anwser}}</h1>
+											</div>
+                      <div style="overflow: auto" class="mt-2">
+                        <div style="float: right">
+                          <button
+                            type="button"
+                            id="prevBtn"
+                            @click="nextPrev(-1)"
+                          >
+                            Anterior
+                          </button>
+                          <button
+                            type="button"
+                            id="nextBtn"
+                            @click="nextPrev(1)"
+                          >
+                            Siguiente
+                          </button>
+                        </div>
+                      </div>
+                      <div style="text-align: center; margin-top: 40px">
+                        <span class="step"></span>
+                        <span class="step"></span>
+                        <span class="step"></span>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+    <script
+      src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+      integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+      integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+      integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+      crossorigin="anonymous"
+    ></script>
+    <!-- Para Integracion-->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <!-- Para Produccion
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
+-->
+    <!--Axios-->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script type="text/javascript">
+      new Vue({
+        el: "#app",
+        data: () => ({
+          edad: 0,
+          text: ["Edad", "Preguntas", "Resultado"],
+          years: true,
+          questions: false,
+          state: false,
+          view: 0,
+          steps: {
+            listYear: [
+              {
+                min: 5,
+                max: 12,
+                value: 0
+              },
+              {
+                min: 13,
+                max: 30,
+                value: 1
+              },
+              {
+                min: 30,
+                max: "más",
+                value: 2
+              },
+            ],
+            preguntas: [
+              {
+                edad: 0,
+                questions: [
+                  {
+                    pregunta: "¿Se siente bien estando solo?",
+                    respuesta: null,
+                  },
+                  {
+                    pregunta: "¿Tiene menos de 3 amigos en clase?",
+                    respuesta: null,
+                  },
+                  {
+                    pregunta: "¿Tiene más de 3 amigos en clase?",
+                    respuesta: null,
+                  },
+                  {
+                    pregunta: "¿Presenta problemas de comportamiento?",
+                    respuesta: null,
+                  },
+                  {
+                    pregunta: "¿Tiene problemas de autoestima?",
+                    respuesta: null,
+                  },
+                  {
+                    pregunta: "¿Es callado en clase?",
+                    respuesta: null,
+                  },
+                  {
+                    pregunta: "¿Le gusta formar grupos en clase?",
+                    respuesta: null,
+                  },
+                  {
+                    pregunta: "¿Es ordenado?",
+                    respuesta: null,
+                  },
+                  {
+                    pregunta: "¿Es optimista?",
+                    respuesta: null,
+                  },
+                  {
+                    pregunta: "¿Es solidario con sus compañeros?",
+                    respuesta: null,
+                  },
+                ],
+              },
+              {
+                edad: 1,
+                questions: [
+                  {
+                    pregunta: "¿Presenta algún vicio?",
+                    respuesta: null,
+                  },
+                  {
+                    pregunta: "¿Sufre de algún complejo de la sociedad?",
+                    respuesta: null,
+                  },
+                  {
+                    pregunta: "¿Tiene independencia familiar?",
+                    respuesta: null,
+                  },
+                  {
+                    pregunta: "¿Le gusta trabajar en grupos?",
+                    respuesta: null,
+                  },
+                  {
+                    pregunta: "¿Tiene autoestima baja?",
+                    respuesta: null,
+                  },
+                  {
+                    pregunta: "¿Es impulsivo?",
+                    respuesta: null,
+                  },
+                ],
+              },
+              {
+                edad: 2,
+                questions: [
+                  {
+                    pregunta: "¿Ha formado alguna familia?",
+                    respuesta: null,
+                  },
+                  {
+                    pregunta: "¿Tuvo una vida agitada?",
+                    respuesta: null,
+                  },
+                  {
+                    pregunta: "¿Tiene problema con la depresión?",
+                    respuesta: null,
+                  },
+                  {
+                    pregunta: "¿Tiene algún vicio?",
+                    respuesta: null,
+                  },
+                  {
+                    pregunta: "¿Su situacion económica es favorable?",
+                    respuesta: null,
+                  },
+                  {
+                    pregunta: "¿Toma medicamentos?",
+                    respuesta: null,
+                  },
+                ],
+              },
+            ],
+          },
+					anwser: ''
+        }),
+        methods: {
+          nextPrev(params) {
+            if (
+              this.view < 0 ||
+              (this.view == 0 && params == -1) ||
+              (this.view == 2 && params == 1)
+            ) {
+              return;
+            }
+            this.view += params;
+            switch (this.view) {
+              case 0:
+                this.years = true;
+                this.questions = false;
+                this.state = false;
+                break;
+              case 1:
+                this.years = false;
+                this.questions = true;
+                this.state = false;								
+                break;
+              case 2:
+								this.process()
+                this.years = false;
+                this.questions = false;
+                this.state = true;								
+                break;
+              default:
+                break;
+            }
+          },
+					process() {			
+						let preguntas = this.steps.preguntas[this.edad].questions;
+						if (this.edad == 0) {
+							if (preguntas[0].respuesta == 1 && preguntas[1].respuesta == 1 && preguntas[2].respuesta == 0 && preguntas[3].respuesta == 0 && preguntas[4].respuesta == 1 && preguntas[5].respuesta == 0 && preguntas[6].respuesta == 1 && preguntas[7].respuesta == 0 && preguntas[8].respuesta == 0 && preguntas[9].respuesta == 0 ) {
+								this.anwser = 'EMOCIONALMENTE INESTABLES E INTROVERTIDAS'
+							}else if (preguntas[0].respuesta == 0 && preguntas[1].respuesta == 0 && preguntas[2].respuesta == 1 && preguntas[3].respuesta == 0 && preguntas[4].respuesta == 0 && preguntas[5].respuesta == 0 && preguntas[6].respuesta == 0 && preguntas[7].respuesta == 0 && preguntas[8].respuesta == 1 && preguntas[9].respuesta == 1 ) {
+								this.anwser = 'EMOCIONALMENTE ESTABLES E EXTROVERTIDAS'
+							}else{
+								this.anwser = 'no se encontraron conincidencias'
+							}
+						}
+						if (this.edad == 1) {
+							if (preguntas[0].respuesta == 1 && preguntas[1].respuesta == 1 && preguntas[2].respuesta == 0 && preguntas[3].respuesta == 0 && preguntas[4].respuesta == 1 && preguntas[5].respuesta == 0) {
+								this.anwser = 'PERSONAS ALTAMENTE INTROVERTIDAS'
+							}else if (preguntas[0].respuesta == 0 && preguntas[1].respuesta == 0 && preguntas[2].respuesta == 1 && preguntas[3].respuesta == 1 && preguntas[4].respuesta == 0 && preguntas[5].respuesta == 1) {
+								this.anwser = 'PERSONAS ALTAMENTE EXTROVERTIDAS'
+							}else{
+								this.anwser = 'no se encontraron conincidencias'
+							}
+						}
+						if (this.edad == 2) {
+							if (preguntas[0].respuesta == 0 && preguntas[1].respuesta == 1 && preguntas[2].respuesta == 1 && preguntas[3].respuesta == 0 && preguntas[4].respuesta == 0 && preguntas[5].respuesta == 0) {
+								this.anwser = 'probabilidad de vejez solitaria'
+							}else if (preguntas[0].respuesta == 1 && preguntas[1].respuesta == 0 && preguntas[2].respuesta == 0 && preguntas[3].respuesta == 0 && preguntas[4].respuesta == 1 && preguntas[5].respuesta == 0) {
+								this.anwser = 'probabilidad de vejez en comunión con su familia'
+							}else{
+								this.anwser = 'no se encontraron conincidencias'
+							}
+						}
+					}
+        },
+        created: function () {},
+      });
+    </script>
+  </body>
 </html>
